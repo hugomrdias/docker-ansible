@@ -1,4 +1,0 @@
-image: hugomrdias/debian-ansible
-test:
-    script:
-    - ansible localhost -m setup
