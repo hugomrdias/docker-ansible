@@ -1,7 +1,6 @@
 # docker-debian-ansible [![Build Status](https://travis-ci.org/hugomrdias/ansible-role-nginx.svg?branch=master)](https://travis-ci.org/hugomrdias/ansible-role-nginx)
 > Docker image to test ansible roles
 
-This image is mainly to test ansible roles 
 This is for advanced users.
 
 ## Build
