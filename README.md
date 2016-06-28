@@ -13,6 +13,11 @@ docker build -t debian-ansible .
 docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it debian-ansible
 ```
 
+## Resources
+https://www.dajobe.org/blog/2015/04/18/making-debian-docker-images-smaller/   
+https://docs.docker.com/engine/tutorials/dockerimages/   
+
+
 
 ## License
 MIT © [Hugo Dias](http://hugodias.me)

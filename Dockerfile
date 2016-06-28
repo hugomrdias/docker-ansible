@@ -27,6 +27,7 @@ ENV BUILD_PACKAGES python \
 
 ENV RUNTIME_PACKAGES python \
     rsync \
+    curl \
     ssh
 
 RUN echo "deb http://httpredir.debian.org/debian jessie contrib" >> /etc/apt/sources.list
