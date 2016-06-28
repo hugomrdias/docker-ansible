@@ -5,12 +5,12 @@ This is for advanced users.
 
 ## Build
 ```
-docker build -t debian-ansible .
+docker build -t hugomrdias/debian-ansible .
 ```
 
 ## Running
 ```
-docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it debian-ansible
+docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it hugomrdias/debian-ansible
 ```
 
 ## Resources
