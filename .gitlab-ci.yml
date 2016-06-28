@@ -2,3 +2,4 @@ image: hugomrdias/debian-ansible
 test:
     script:
     - ansible localhost -m setup
+    - ansible-galaxy install hugomrdias.basic
