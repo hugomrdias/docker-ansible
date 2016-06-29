@@ -1,22 +1,19 @@
-image: docker:latest
-services:
-- docker:dind
-
 stages:
-- build
-- test
-- release
+  - build
+  - test
+  - release
 
 variables:
   CONTAINER_TEST_IMAGE: hugomrdias/ansible:$CI_BUILD_REF_NAME
   CONTAINER_RELEASE_IMAGE: hugomrdias/ansible:latest
 
-before_script:
-  - docker login -u hugomrdias -p $DOCKER_HUB_PASS
-
 build:
+  image: docker:latest
+  services:
+    - docker:dind
   stage: build
   script:
+    - docker login -u hugomrdias -p $DOCKER_HUB_PASS
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
@@ -30,7 +27,11 @@ test:
 
 release:
   stage: release
+  image: docker:latest
+  services:
+    - docker:dind
   script:
+    - docker login -u hugomrdias -p $DOCKER_HUB_PASS
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
