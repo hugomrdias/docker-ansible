@@ -1,16 +1,16 @@
-# docker-debian-ansible [![build status](https://gitlab.com/hugomrdias/docker-ansible/badges/master/build.svg)](https://gitlab.com/hugomrdias/docker-ansible/commits/master)
-> Docker image to test ansible roles
+# docker-ansible [![build status](https://gitlab.com/hugomrdias/docker-ansible/badges/master/build.svg)](https://gitlab.com/hugomrdias/docker-ansible/commits/master)
+> Docker image to test ansible roles based on debian jessie 
 
 This is for advanced users.
 
 ## Build
 ```
-docker build -t hugomrdias/debian-ansible .
+docker build -t hugomrdias/ansible .
 ```
 
 ## Running
 ```
-docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it hugomrdias/debian-ansible
+docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it hugomrdias/ansible
 ```
 
 ## Resources

@@ -1,45 +1,31 @@
-FROM debian
+FROM debian:jessie
 MAINTAINER Hugo Dias <mail@hugodias.me>
 
 ENV BUILD_PACKAGES python \
-    build-essential \
+    gcc \
+    curl \
     python-dev \
-    python-distribute \
     python-pip \
-    libbz2-dev \
-    libcurl4-openssl-dev \
-    libdb-dev \
-    libevent-dev \
     libffi-dev \
-    libgeoip-dev \
-    libglib2.0-dev \
-    libjpeg-dev \
-    liblzma-dev \
-    libpq-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libssl-dev \
-    libtool \
-    libyaml-dev \
-    patch \
-    xz-utils \
-    zlib1g-dev
+    libssl-dev
 
 ENV RUNTIME_PACKAGES python \
     rsync \
     curl \
     ca-certificates \
-    ssh
+    openssh-client \
+    sshpass
 
 RUN echo "deb http://httpredir.debian.org/debian jessie contrib" >> /etc/apt/sources.list
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ${BUILD_PACKAGES} \
-    && pip install -U ansible \
-    && apt-get remove --purge -y ${BUILD_PACKAGES} $(apt-mark showauto) \
-    && apt-get install -y --no-install-recommends ${RUNTIME_PACKAGES} \
-    && apt-get clean \
-    && rm -rf /tmp/* /var/tmp/* \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y && apt-get install --fix-missing && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends ${BUILD_PACKAGES} && \
+    pip install -U ansible && \
+    apt-get remove --purge -y ${BUILD_PACKAGES} $(apt-mark showauto) && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends ${RUNTIME_PACKAGES} && \
+    apt-get clean && \
+    rm -rf  /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 80
