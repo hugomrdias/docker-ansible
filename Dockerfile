@@ -14,7 +14,8 @@ ENV RUNTIME_PACKAGES python \
     curl \
     ca-certificates \
     openssh-client \
-    sshpass
+    sshpass \
+    git
 
 RUN echo "deb http://httpredir.debian.org/debian jessie contrib" >> /etc/apt/sources.list
 
