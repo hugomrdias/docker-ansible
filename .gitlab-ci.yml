@@ -31,7 +31,7 @@ test-ubuntu:
   image: hugomrdias/ansible:ubuntu-test
   script:
     - ansible localhost -m setup
-    - ansible-galaxy install hugomrdias.basi
+    - ansible-galaxy install hugomrdias.basic
 
 release:
   stage: release
