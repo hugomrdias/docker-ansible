@@ -14,16 +14,24 @@ build:
   stage: build
   script:
     - docker login -u hugomrdias -p $DOCKER_HUB_PASS
-    - docker build --pull -t $CONTAINER_TEST_IMAGE .
-    - docker push $CONTAINER_TEST_IMAGE
+    - docker build --pull -t hugomrdias/ansible:debian-test .
+    - docker push hugomrdias/ansible:debian-test
+    - docker build -f ubuntu/Dockerfile --pull -t hugomrdias/ansible:ubuntu-test .
+    - docker push hugomrdias/ansible:ubuntu-test
 
-test:
+test-debian:
   stage: test
-  image: $CONTAINER_TEST_IMAGE
+  image: hugomrdias/ansible:debian-test
   script:
     - ansible localhost -m setup
     - ansible-galaxy install hugomrdias.basic
 
+test-ubuntu:
+  stage: test
+  image: hugomrdias/ansible:ubuntu-test
+  script:
+    - ansible localhost -m setup
+    - ansible-galaxy install hugomrdias.basi
 
 release:
   stage: release
@@ -32,8 +40,11 @@ release:
     - docker:dind
   script:
     - docker login -u hugomrdias -p $DOCKER_HUB_PASS
-    - docker pull $CONTAINER_TEST_IMAGE
-    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - docker pull hugomrdias/ansible:debian-test
+    - docker tag hugomrdias/ansible:debian-test hugomrdias/ansible:debian
+    - docker push hugomrdias/ansible:debian
+    - docker pull hugomrdias/ansible:ubuntu-test
+    - docker tag hugomrdias/ansible:ubuntu-test hugomrdias/ansible:ubuntu
+    - docker push hugomrdias/ansible:ubuntu
   only:
     - master
