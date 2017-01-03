@@ -3,10 +3,6 @@ stages:
   - test
   - release
 
-variables:
-  CONTAINER_TEST_IMAGE: hugomrdias/ansible:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: hugomrdias/ansible:latest
-
 build:
   image: docker:latest
   services:
@@ -14,7 +10,7 @@ build:
   stage: build
   script:
     - docker login -u hugomrdias -p $DOCKER_HUB_PASS
-    - docker build --pull -t hugomrdias/ansible:debian-test .
+    - docker build -f debian/Dockerfile --pull -t hugomrdias/ansible:debian-test .
     - docker push hugomrdias/ansible:debian-test
     - docker build -f ubuntu/Dockerfile --pull -t hugomrdias/ansible:ubuntu-test .
     - docker push hugomrdias/ansible:ubuntu-test
