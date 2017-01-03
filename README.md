@@ -1,16 +1,18 @@
 # docker-ansible [![build status](https://gitlab.com/hugomrdias/docker-ansible/badges/master/build.svg)](https://gitlab.com/hugomrdias/docker-ansible/commits/master)
-> Docker image to test ansible roles based on debian jessie 
+> Docker image to test ansible roles based on debian jessie or ubuntu xenial
 
 This is for advanced users.
+The images use Ansible stable version (installed from official PyPI repo)   
 
 ## Build
 ```
-docker build -t hugomrdias/ansible .
+docker build -f ubuntu/Dockerfile -t hugomrdias/ansible:ubuntu .
+docker build -f debian/Dockerfile -t hugomrdias/ansible:debian .
 ```
 
 ## Running
 ```
-docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" -p 80:80 -it hugomrdias/ansible
+docker run -v `pwd`:/tmp/"${PWD##*/}" -w /tmp/"${PWD##*/}" --rm -it hugomrdias/ansible
 ```
 
 ## Resources
