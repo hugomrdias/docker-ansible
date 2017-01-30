@@ -19,6 +19,7 @@ test-debian:
   stage: test
   image: hugomrdias/ansible:debian-test
   script:
+    - ansible --version
     - ansible localhost -m setup
     - ansible-galaxy install hugomrdias.basic
 
@@ -26,6 +27,7 @@ test-ubuntu:
   stage: test
   image: hugomrdias/ansible:ubuntu-test
   script:
+    - ansible --version
     - ansible localhost -m setup
     - ansible-galaxy install hugomrdias.basic
 
